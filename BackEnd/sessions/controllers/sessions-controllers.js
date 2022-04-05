@@ -2,7 +2,7 @@
 const HttpError = require("../../models/http-error");
 //API REQUESTS
 const fetch = require("node-fetch");
-//PostgreSQL connection
+//Encrypted password
 const bcrypt = require("bcryptjs");
 
 //POSTGRESQL CONNECTION POOL
@@ -48,8 +48,6 @@ const signUpController = async (req, res, next) => {
 
 const signInController = async (req, res, next) => {
   const { email, password, visitorId } = req.body;
-  let getVisitorInfoFingerPrintJS = undefined;
-  let isNewBrowser = undefined;
   let isEmailValid = undefined;
   let isUserAuthenticated = undefined;
   let userData = undefined;
@@ -121,23 +119,24 @@ const signInController = async (req, res, next) => {
       await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, false])    
     } catch(err){
       console.log("error")
-      console.log(err)
       return next(new HttpError("Error saving failed login attempt!", 404));
     }
     
+    console.log("Not user")
     return next(new HttpError(`New failed login attempt saved!`, 404));
+    
+}
 
-  }
 
-
-  if(isUserAuthenticated){
-
+if(isUserAuthenticated){
+    
     try {
-      await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, true])    
+        await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, true])    
     } catch(err){
-      return next(new HttpError("Error saving success login attempt!", 404));
+        return next(new HttpError("Error saving success login attempt!", 404));
     }
-
+    
+    console.log("user")
     res.status(201).json(`Succesfull login attempt saved!`);    
   } 
 
