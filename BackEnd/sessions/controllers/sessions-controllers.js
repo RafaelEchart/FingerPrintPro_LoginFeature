@@ -61,7 +61,20 @@ const signInController = async (req, res, next) => {
     const { rows } = await pool.query("  SELECT * FROM login_attempts WHERE time_attempt >= NOW() - INTERVAL '5 minutes' AND successfull = false AND email = $1", [email])
     
     if(rows.length >= 5){
+      const tempVisitorID = [];
+
+      rows.forEach(log_attempt =>{
+        tempVisitorID.push(log_attempt.visitor_id)
+      });
+
+      const checkVisitorIdSpoofing = [...new Set(tempVisitorID)];
+
+      if(checkVisitorIdSpoofing.length > 1){
+        return next(new HttpError("This might be a spoofing attempt! Account Disabled!.", 404));
+      }
+
       return next(new HttpError("Too much attempts!, Try again later.", 404));
+
     }
 
   }catch(err){
