@@ -1,6 +1,6 @@
 import "./style.css";
 import { List, Button } from "antd";
-const HistoryContent = ({ visitorData, next }) => (
+const HistoryContent = ({ visitorData, next, back }) => (
   <>
     <div className="history_division">
       <h2 className="history_title">
@@ -29,9 +29,14 @@ const HistoryContent = ({ visitorData, next }) => (
       {visitorData && visitorData.visits.length && (
         <>
           <span>You can use this data, to prevent fraud online.</span>
+          <div className="history_button_container">
+          <Button type="dashed" className="history_button" onClick={back}>
+            Back
+          </Button>
           <Button type="dashed" className="history_button" onClick={next}>
             Next
           </Button>
+          </div>
         </>
       )}
     </div>

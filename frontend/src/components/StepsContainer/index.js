@@ -14,9 +14,9 @@ const StepsContainer = ({ visitorData }) => {
       setCurrentStep(currentStep + 1);
     };
   
-    // const prev = () => {
-    //   setCurrentStep(currentStep - 1);
-    // };
+    const back = () => {
+      setCurrentStep(currentStep - 1);
+    };
 
 
     const { Step } = Steps;
@@ -28,7 +28,7 @@ const StepsContainer = ({ visitorData }) => {
         },
         {
           title: 'History',
-          content: <HistoryContent visitorData={visitorData} next={next} />,
+          content: <HistoryContent visitorData={visitorData} next={next} back={back} />,
         },
         {
           title: 'Feature',

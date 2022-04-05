@@ -43,3 +43,9 @@
 .history_list_container::-webkit-scrollbar {
     display: none;
   }
+
+  .history_button_container {
+      display:flex;
+      flex-direction: row;
+      gap: 10px;
+  }
