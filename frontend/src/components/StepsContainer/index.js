@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Steps } from 'antd';
 import WelcomeContent from './Content/WelcomeContent'
+import HistoryContent from './Content/HistoryContent'
 
 
 const StepsContainer = ({ visitorData }) => { 
@@ -27,7 +28,7 @@ const StepsContainer = ({ visitorData }) => {
         },
         {
           title: 'History',
-          content: 'Second-content',
+          content: <HistoryContent visitorData={visitorData} next={next} />,
         },
         {
           title: 'Feature',
