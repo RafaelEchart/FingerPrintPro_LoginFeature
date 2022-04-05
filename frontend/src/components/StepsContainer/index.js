@@ -8,6 +8,14 @@ const StepsContainer = ({ visitorData }) => {
     const [ currentStep, setCurrentStep ] = useState(0)
     console.log(visitorData)
 
+    const next = () => {
+      console.log('next')
+      setCurrentStep(currentStep + 1);
+    };
+  
+    // const prev = () => {
+    //   setCurrentStep(currentStep - 1);
+    // };
 
 
     const { Step } = Steps;
@@ -15,10 +23,10 @@ const StepsContainer = ({ visitorData }) => {
     const stepOptions = [
         {
           title: 'Welcome',
-          content: <WelcomeContent visitorData={visitorData} />,
+          content: <WelcomeContent visitorData={visitorData} next={next} />,
         },
         {
-          title: 'Sign Up',
+          title: 'History',
           content: 'Second-content',
         },
         {
