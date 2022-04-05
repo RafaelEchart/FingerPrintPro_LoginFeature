@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import FingerprintJS from "@fingerprintjs/fingerprintjs-pro";
+import { Spin } from 'antd'
 import logo from "./logo.svg";
 import "./App.css";
 
 function App() {
+  const [ isLoading, setIsLoading ] = useState(false);
   const [visitorData, setVisitorData] = useState({
     visitorId: "",
     visitorIdData: "",
@@ -23,12 +25,12 @@ function App() {
 
     visitorDataAPI = await visitorDataAPI.json()
     visitorDataAPI = visitorDataAPI.getVisitorInfoFingerPrintJS
-    console.log(visitorDataAPI)
     setVisitorData({ ...visitorData, visitorIdData: visitorDataAPI });
-
+    setIsLoading(false)
   };
 
   const initialFunction = async () => {
+    setIsLoading(true)
     try {
       let visitorId = await FingerprintJS.load({ apiKey: "k4olxEPmCuFGfnxkiJf5" });
       visitorId = await visitorId.get() 
@@ -49,6 +51,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
+
+        {isLoading && <Spin size="large" />
+}
+        {!isLoading && <>
         <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
@@ -58,9 +64,11 @@ function App() {
           href="https://reactjs.org"
           target="_blank"
           rel="noopener noreferrer"
-        >
+          >
           Learn React
         </a>
+          </>
+        }
       </header>
     </div>
   );
