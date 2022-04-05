@@ -1,3 +1,6 @@
+//HTTP errors
+const HttpError = require("../../models/http-error");
+
 //Controllers:
 //
 // - signUpController
