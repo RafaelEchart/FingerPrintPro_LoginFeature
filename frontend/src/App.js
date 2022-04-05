@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FingerprintJS from "@fingerprintjs/fingerprintjs-pro";
 import { Spin } from 'antd'
-import logo from "./logo.svg";
+import StepsContainer from './components/StepsContainer';
 import "./App.css";
 
 function App() {
@@ -52,23 +52,8 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        {isLoading && <Spin size="large" />
-}
-        {!isLoading && <>
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-          >
-          Learn React
-        </a>
-          </>
-        }
+        {isLoading ? <Spin size="large" /> : <StepsContainer visitorData={visitorData} /> }
+
       </header>
     </div>
   );
