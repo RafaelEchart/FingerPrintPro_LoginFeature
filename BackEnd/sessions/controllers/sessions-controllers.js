@@ -50,9 +50,25 @@ const signInController = async (req, res, next) => {
   const { email, password, visitorId } = req.body;
   let getVisitorInfoFingerPrintJS = undefined;
   let isNewBrowser = undefined;
+  let isEmailValid = undefined;
+  let isUserAuthenticated = undefined;
+  let userData = undefined;
+ 
 
   //--
   //First process: Check in the persisted data if the user has 5 failed attempts in the last 5 minutes.
+  try {
+    const { rows } = await pool.query("  SELECT * FROM login_attempts WHERE time_attempt >= NOW() - INTERVAL '5 minutes' AND successfull = false AND email = $1", [email])
+    
+    if(rows.length >= 5){
+      return next(new HttpError("Too much attempts!, Try again later.", 404));
+    }
+
+  }catch(err){
+      console.log(err)
+    return next(new HttpError("Error trying to get login attempts", 404));
+  }
+
 
   //--
   //Second process: Make use of FingerprintJS Pro to verify is this browser is new to my WebPage.
