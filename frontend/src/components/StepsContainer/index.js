@@ -3,9 +3,10 @@ import { Steps } from 'antd';
 import WelcomeContent from './Content/WelcomeContent'
 
 
-const StepsContainer = () => { 
+const StepsContainer = ({ visitorData }) => { 
 
     const [ currentStep, setCurrentStep ] = useState(0)
+    console.log(visitorData)
 
 
 
@@ -14,7 +15,7 @@ const StepsContainer = () => {
     const stepOptions = [
         {
           title: 'Welcome',
-          content: <WelcomeContent/>,
+          content: <WelcomeContent visitorData={visitorData} />,
         },
         {
           title: 'Sign Up',

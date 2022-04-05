@@ -6,13 +6,9 @@ import "./App.css";
 
 function App() {
   const [ isLoading, setIsLoading ] = useState(false);
-  const [visitorData, setVisitorData] = useState({
-    visitorId: "",
-    visitorIdData: "",
-  });
+  const [visitorData, setVisitorData] = useState(undefined);
 
   const getVisitorData = async (visitorId) => {
-    console.log(visitorId)
     let visitorDataAPI = await fetch("http://localhost:3001/api/", {
       method: "post",
       headers: {
@@ -25,8 +21,7 @@ function App() {
 
     visitorDataAPI = await visitorDataAPI.json()
     visitorDataAPI = visitorDataAPI.getVisitorInfoFingerPrintJS
-    console.log(visitorDataAPI)
-    setVisitorData({ ...visitorData, visitorIdData: visitorDataAPI });
+    setVisitorData(visitorDataAPI);
     setIsLoading(false)
   };
 
@@ -37,7 +32,6 @@ function App() {
       visitorId = await visitorId.get() 
       visitorId = visitorId.visitorId
   
-      setVisitorData({ ...visitorData, visitorId: visitorId });
       await getVisitorData(visitorId);
     }catch(err){
       console.log(err)

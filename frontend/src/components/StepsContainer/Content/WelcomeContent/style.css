@@ -21,12 +21,18 @@
     text-align: left;
     width: 60%;
     padding: 16px;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 .welcome_division_right {
     width: 40%;
     padding: 10px;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
 }
 
 .welcome_division_left span {
@@ -52,13 +58,14 @@
 
 .welcome_visitor_id {
 
-    width: 90%;
+    width: 95%;
     height: 70px;
     display: flex;
     background-color: #293542;
     border-radius: 10px;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 5px;
 
 }
 .welcome_visitor_id span {
@@ -74,3 +81,23 @@
 .link {
     color: #ff6700;
 }
+
+.welcome_visitor_data {
+
+    width: 60%;
+    height: 210px;
+    display: flex;
+    background-color: #293542;
+    border-radius: 10px;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.welcome_visitor_data span {
+
+    color: white
+
+}
+

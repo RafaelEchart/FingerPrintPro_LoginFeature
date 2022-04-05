@@ -1,6 +1,6 @@
 import "./style.css";
 import { Button } from 'antd'
-const WelcomeContent = () => (
+const WelcomeContent = ({ visitorData }) => (
   <>
     <div className="welcome_division">
       <div className="welcome_division_left">
@@ -21,10 +21,20 @@ const WelcomeContent = () => (
         <span>
         Visitor Id:
         </span>
-        <div className="welcome_visitor_visitor_id"> jhgjujh34g32jh4g3</div>
+        <div className="welcome_visitor_visitor_id"> {visitorData && visitorData.visitorId}</div>
       </div>
-      <div className="welcome_history">
-
+      <div className="welcome_visitor_data">
+       {
+         visitorData && visitorData.visits.length ? 
+         <>
+         <div><span>IP: { visitorData.visits[0].ip}</span></div> 
+         <div><span>Latitude: { visitorData.visits[0].ipLocation.latitude }</span></div> 
+         <div><span>Longitude: { visitorData.visits[0].ipLocation.longitude }</span></div> 
+         <div><span>Country: { visitorData.visits[0].ipLocation.country.name }</span></div> 
+         <div><span>Browser: { visitorData.visits[0].browserDetails.browserName }</span></div> 
+         </>
+         : null
+       }
       </div>
       </div>
     </div>
