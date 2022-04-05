@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Steps } from 'antd';
 import WelcomeContent from './Content/WelcomeContent'
 import HistoryContent from './Content/HistoryContent'
+import FeatureContent from './Content/FeatureContent'
 
 
 const StepsContainer = ({ visitorData }) => { 
@@ -32,7 +33,7 @@ const StepsContainer = ({ visitorData }) => {
         },
         {
           title: 'Feature',
-          content: 'Last-content',
+          content: <FeatureContent visitorData={visitorData} next={next} back={back} />,
         },
         {
           title: 'Sign Up',

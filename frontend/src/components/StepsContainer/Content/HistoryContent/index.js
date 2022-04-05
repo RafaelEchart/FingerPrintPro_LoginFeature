@@ -4,7 +4,7 @@ const HistoryContent = ({ visitorData, next, back }) => (
   <>
     <div className="history_division">
       <h2 className="history_title">
-        The FingerPrintJS PRO service also stores the history information, to
+        The <a className="link" href="https://fingerprintjs.com/" target="_blank" rel="noopener noreferrer">FingerPrintJS PRO</a> service also stores the history information, to
         help you identity threats.
       </h2>
 
