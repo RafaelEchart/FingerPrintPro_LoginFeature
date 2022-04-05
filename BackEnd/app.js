@@ -8,6 +8,10 @@ const HttpError = require("./models/http-error");
 //Sessions
 const sessionsRoutes = require("./sessions/routes/sessions-routes");
 
+//ENV variables for clean connection
+const dotenv = require('dotenv');
+dotenv.config();
+
 
 const app = express();
 
