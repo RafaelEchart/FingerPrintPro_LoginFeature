@@ -6,6 +6,17 @@ const fetch = require("node-fetch");
 const bcrypt = require("bcryptjs");
 
 
+//POSTGRESQL CONNECTION POOL
+const Pool = require("pg").Pool;
+
+const pool = new Pool({
+  user: `${process.env.API_POSTGRESQL_USERNAME}`,
+  host: process.env.API_POSTGRESQL_HOST,
+  database: `${process.env.API_POSTGRESQL_DATABASE}`,
+  password: `${process.env.API_POSTGRESQL_PASSWORD}`,
+  port: process.env.API_POSTGRESQL_PORT,
+});
+
 
 //Controllers:
 //
