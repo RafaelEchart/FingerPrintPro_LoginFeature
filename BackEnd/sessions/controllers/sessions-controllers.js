@@ -1,5 +1,11 @@
 //HTTP errors
 const HttpError = require("../../models/http-error");
+//API REQUESTS
+const fetch = require("node-fetch");
+//PostgreSQL connection
+const bcrypt = require("bcryptjs");
+
+
 
 //Controllers:
 //
