@@ -117,6 +117,19 @@ const signInController = async (req, res, next) => {
   }
 
 
+  if(isUserAuthenticated){
+
+    try {
+      await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, true])    
+    } catch(err){
+      return next(new HttpError("Error saving success login attempt!", 404));
+    }
+
+    res.status(201).json(`Succesfull login attempt saved!`);    
+  } 
+
+
+
 };
 
 exports.signUpController = signUpController;
