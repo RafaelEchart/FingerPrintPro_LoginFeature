@@ -18,29 +18,28 @@ const pool = new Pool({
 
 const initialController = async (req, res, next) => {
 
-  const { email, password, visitorId } = req.body;
+  const { visitorId } = req.body;
+
+  console.log("here")
+  console.log(visitorId)
 
 
   let getVisitorInfoFingerPrintJS = undefined;
-  let isNewBrowser = undefined;
 
   
   try {
     getVisitorInfoFingerPrintJS = await fetch(
       `https://api.fpjs.io/visitors/${visitorId}?api_key=ShKyYQhDzEc2ZEHRKp6V`
-    );
+      );
     getVisitorInfoFingerPrintJS = await getVisitorInfoFingerPrintJS.json();
   } catch (err) {
+    console.log(err)
     return next(new HttpError("Error in API petition", 404));
   }
 
-  //Conditional: Check if new browser
-  if (!getVisitorInfoFingerPrintJS.visits.length) {
-    isNewBrowser = true;
-  }
+  
 
   res.status(201).json({
-    isNewBrowser,
     getVisitorInfoFingerPrintJS
   });    
 
