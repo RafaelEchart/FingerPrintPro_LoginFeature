@@ -64,3 +64,22 @@
   .form-wrapper button:hover {
     background: #717a9e;
   }
+
+  .signup_options {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+  }
+
+  .signup_option {
+    color: lightsalmon;
+    font-size: 15px;
+    cursor: pointer;
+    width:fit-content;
+  }
+
+  .go_back {
+      color: black;
+      margin-top: 5px;
+  }
