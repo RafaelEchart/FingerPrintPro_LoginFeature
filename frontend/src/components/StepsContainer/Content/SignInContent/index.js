@@ -1,12 +1,19 @@
+import { useState } from 'react'
 import "./style.css";
 import { ArrowLeftOutlined } from "@ant-design/icons";
 import Functionalities from './Functionalities'
 import SignInForm from './SignInForm'
+import ErrorsView from './ErrorsView'
 
-const signInContent = ({ visitorData, next, back }) => {
+const SignInContent = ({ visitorData, next, back }) => {
 
+  const [ errorsList, setErrorsList ] = useState([])
   
 
+  const errorsHandler = (error) => {
+    let errorMessage = error.replace('Error: ', '')
+    setErrorsList([ errorMessage, ...errorsList])
+  }
 
   return (
     <>
@@ -18,12 +25,13 @@ const signInContent = ({ visitorData, next, back }) => {
            <Functionalities />
           </span>
           
-          <SignInForm visitorData={visitorData} next={next} />
+          <SignInForm visitorData={visitorData} next={next} errorsHandler={errorsHandler} />
 
   
         </div>
         <div className="signIn_division_right">
-  
+          {errorsList.length ? <ErrorsView errors={errorsList} /> : null}
+        
         
         </div>
       </div>
@@ -31,4 +39,4 @@ const signInContent = ({ visitorData, next, back }) => {
   )
 }
 
-export default signInContent;
+export default SignInContent;

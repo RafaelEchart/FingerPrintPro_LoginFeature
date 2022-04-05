@@ -118,3 +118,24 @@
     padding: 15px;
     border-radius: 15px;
   }
+
+  .errors_container {
+    width: 90%;
+    height: 220px;
+    overflow: auto;
+    padding: 15px;
+    border-radius: 8px;
+    background-color: #F7F7F7;
+  }
+
+  .errors_container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .errors_view {
+      width: 100%;
+  }
+
+  .errors_view h3 {
+      float: left;
+  }

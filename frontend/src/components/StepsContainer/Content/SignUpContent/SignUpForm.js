@@ -64,9 +64,9 @@ const SignUpForm = ({ next }) => {
   };
 
   return (
-    <div class="inputWrapper">
-      <div class="form-wrapper">
-        <form class="form-class" method="post">
+    <div className="inputWrapper">
+      <div className="form-wrapper">
+        <form className="form-class" method="post">
           <input
             id="nameInput"
             required

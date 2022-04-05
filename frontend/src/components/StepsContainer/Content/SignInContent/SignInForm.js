@@ -2,7 +2,7 @@ import { useState } from "react";
 import { message } from "antd";
 import "./style.css";
 
-const SignInForm = ({ visitorData, next }) => {
+const SignInForm = ({ visitorData, next, errorsHandler }) => {
   const [signInData, setsignInData] = useState({
     email: "",
     password: "",
@@ -50,7 +50,7 @@ const SignInForm = ({ visitorData, next }) => {
         // next()
       } catch (err) {
         message.error(err.toString());
-        console.log(err);
+        errorsHandler(err.toString())
       }
     } else {
       message.error("Data can not be empty.");
@@ -59,9 +59,9 @@ const SignInForm = ({ visitorData, next }) => {
 
   return (
     <div>
-      <div class="signIn_inputWrapper">
-        <div class="form-wrapper">
-          <form class="form-class" method="post">
+      <div className="signIn_inputWrapper">
+        <div className="form-wrapper">
+          <form className="form-class" method="post">
             <input
               id="nameInput"
               required
