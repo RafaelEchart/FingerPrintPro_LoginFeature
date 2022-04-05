@@ -34,17 +34,18 @@ const signUpController = async (req, res, next) => {
     (error, results) => {
       if (error) {
         if (error.code === "23505") {
-          return next(new HttpError("This email is alredy registered.", 404));
+          return res.status(404).json({error: "This email is alredy registered." });
         }
-        return next(
-          new HttpError("Error trying to INSERT user, try again.", 404)
-        );
+        return res.status(404).json({error: "Error trying to INSERT user, try again." });
       }
 
-      res.status(201).json(`Account Created!`);
+      res.status(200).json({
+        accountCreated: true
+      });
+      
     }
-  );
-};
+    );
+  };
 
 const signInController = async (req, res, next) => {
   const { email, password, visitorId } = req.body;
@@ -69,16 +70,16 @@ const signInController = async (req, res, next) => {
       const checkVisitorIdSpoofing = [...new Set(tempVisitorID)];
 
       if(checkVisitorIdSpoofing.length > 1){
-        return next(new HttpError("This might be a spoofing attempt! Account Disabled!.", 404));
+        return res.status(404).json({error: "This might be a spoofing attempt! Account Disabled!." });
       }
 
-      return next(new HttpError("Too much attempts!, Try again later.", 404));
+      return res.status(404).json({error: "Too much attempts!, Try again later." });
 
     }
 
   }catch(err){
       console.log(err)
-    return next(new HttpError("Error trying to get login attempts", 404));
+      return res.status(404).json({error: "Error trying to get login attempts." });
   }
 
 
@@ -92,13 +93,13 @@ const signInController = async (req, res, next) => {
     ]);
 
     if (!rows.length) {
-      return next(new HttpError("This email is not valid!", 404));
+      return res.status(404).json({error: "This email is not valid!" });
     }
 
     isEmailValid = true;
     userData = rows[0];
   } catch (err) {
-    return next(new HttpError("Error in postgreSQL action!", 404));
+    return res.status(404).json({error: "Error in postgreSQL action!" });
   }
 
 
@@ -118,26 +119,24 @@ const signInController = async (req, res, next) => {
     try {
       await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, false])    
     } catch(err){
-      console.log("error")
-      return next(new HttpError("Error saving failed login attempt!", 404));
+      return res.status(404).json({error: "Error saving failed login attempt!" });
     }
     
-    console.log("Not user")
-    return next(new HttpError(`New failed login attempt saved!`, 404));
     
-}
-
-
-if(isUserAuthenticated){
+    return res.status(404).json({error: "New failed login attempt saved!" });
+    
+  }
+  
+  
+  if(isUserAuthenticated){
     
     try {
-        await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, true])    
+      await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, true])    
     } catch(err){
-        return next(new HttpError("Error saving success login attempt!", 404));
+      return res.status(404).json({error: "Error saving success login attempt!" });
     }
     
-    console.log("user")
-    res.status(201).json(`Succesfull login attempt saved!`);    
+    res.status(201).json({authenticated: true});    
   } 
 
 
