@@ -73,7 +73,7 @@ const signInController = async (req, res, next) => {
         return res.status(404).json({error: "This might be a spoofing attempt! Account Disabled!." });
       }
 
-      return res.status(404).json({error: "Too much attempts!, Try again later." });
+      return res.status(404).json({error: "Too many attempts!, Try again later." });
 
     }
 
