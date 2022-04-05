@@ -3,6 +3,7 @@ import { Steps } from 'antd';
 import WelcomeContent from './Content/WelcomeContent'
 import HistoryContent from './Content/HistoryContent'
 import FeatureContent from './Content/FeatureContent'
+import SignUpContent from './Content/SignUpContent'
 
 
 const StepsContainer = ({ visitorData }) => { 
@@ -37,7 +38,7 @@ const StepsContainer = ({ visitorData }) => {
         },
         {
           title: 'Sign Up',
-          content: 'First-content',
+          content: <SignUpContent visitorData={visitorData} next={next} back={back} />,
         },
         {
           title: 'Sign In',

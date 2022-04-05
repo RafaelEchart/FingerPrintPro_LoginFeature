@@ -1,0 +1,66 @@
+@import url("https://fonts.cdnfonts.com/css/countryside");
+
+.signup_title {
+    font-size: 25px;
+    width: 55%;
+}
+
+.signup_division {
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 30px;
+    align-items: center;
+}
+
+
+  .signup_form {
+    /* margin-top: 35px; */
+  }
+
+  .inputWrapper {
+    width: 360px;
+    padding: 8% 0 0;
+    margin: auto;
+  }
+
+  .form-wrapper input {
+    outline: 0;
+    background: #f2f2f2;
+    width: 100%;
+    max-height: 260px;
+    border: 0;
+    border-radius: 5px;
+    margin: 0 0 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+  }
+
+  
+.form-wrapper input:hover {
+    background: #f7f7f7;
+  }
+
+  .form-wrapper button {
+    outline: 0;
+    background: #4b517f;
+    width: 100%;
+    border: 0;
+    border-radius: 5px;
+    padding: 15px;
+    color: #fff;
+    font-size: 14px;
+    cursor: pointer;
+  }
+
+
+  .form-wrapper button:active {
+    background: #1f223a;
+  }
+  
+  .form-wrapper button:hover {
+    background: #717a9e;
+  }
