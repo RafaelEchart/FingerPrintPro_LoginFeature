@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Steps } from 'antd';
+import WelcomeContent from './Content/WelcomeContent'
 
 
 const StepsContainer = () => { 
@@ -13,7 +14,7 @@ const StepsContainer = () => {
     const stepOptions = [
         {
           title: 'Welcome',
-          content: 'First-content',
+          content: <WelcomeContent/>,
         },
         {
           title: 'Sign Up',
@@ -45,6 +46,12 @@ const StepsContainer = () => {
           <Step key={item.title} title={item.title} />
         ))}
       </Steps>
+    
+    <div className="steps-content">
+    {stepOptions[currentStep].content}
+
+    </div>
+      
 
      </>
 

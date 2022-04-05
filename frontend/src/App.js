@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import FingerprintJS from "@fingerprintjs/fingerprintjs-pro";
-import { Spin } from 'antd'
 import StepsContainer from './components/StepsContainer';
+import SpinLoading from './components/Spinner';
 import "./App.css";
 
 function App() {
@@ -25,6 +25,7 @@ function App() {
 
     visitorDataAPI = await visitorDataAPI.json()
     visitorDataAPI = visitorDataAPI.getVisitorInfoFingerPrintJS
+    console.log(visitorDataAPI)
     setVisitorData({ ...visitorData, visitorIdData: visitorDataAPI });
     setIsLoading(false)
   };
@@ -52,7 +53,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        {isLoading ? <Spin size="large" /> : <StepsContainer visitorData={visitorData} /> }
+        {isLoading ? <SpinLoading /> : <StepsContainer visitorData={visitorData} /> }
 
       </header>
     </div>

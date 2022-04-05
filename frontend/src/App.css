@@ -21,11 +21,11 @@
   align-items: center;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  color: white;
+
 }
 
 .App-link {
-  color: #61dafb;
+  color: #ff6700;
 }
 
 @keyframes App-logo-spin {
@@ -47,4 +47,8 @@
 
 .ant-spin {
   margin: auto;
+}
+
+.steps-content {
+  width: 95%;
 }
