@@ -57,6 +57,7 @@ const signInController = async (req, res, next) => {
 
   //--
   //First process: Check in the persisted data if the user has 5 failed attempts in the last 5 minutes.
+  //Check if more than 1 visitorId is stored in the 5 attempts (Spoofing attempt).
   try {
     const { rows } = await pool.query("  SELECT * FROM login_attempts WHERE time_attempt >= NOW() - INTERVAL '5 minutes' AND successfull = false AND email = $1", [email])
     
@@ -84,24 +85,7 @@ const signInController = async (req, res, next) => {
 
 
   //--
-  //Second process: Make use of FingerprintJS Pro to verify is this browser is new to my WebPage.
-  //A get petition to /visitoris/<visitorId>?api_key=ShKyYQhDzEc2ZEHRKp6V
-  try {
-    getVisitorInfoFingerPrintJS = await fetch(
-      `https://api.fpjs.io/visitors/${visitorId}?api_key=ShKyYQhDzEc2ZEHRKp6V`
-    );
-    getVisitorInfoFingerPrintJS = await getVisitorInfoFingerPrintJS.json();
-  } catch (err) {
-    return next(new HttpError("Error in API petition", 404));
-  }
-
-  //Conditional: Check if new browser
-  if (!getVisitorInfoFingerPrintJS.visits.length) {
-    isNewBrowser = true;
-  }
-
-  //--
-  //Third process: Verify the email is valid (is found on the users table registry)
+  //Second process: Verify the email is valid (is found on the users table registry)
 
   //A petition postgreSQL database to verify the existence of the email address
   try {
@@ -122,13 +106,13 @@ const signInController = async (req, res, next) => {
 
 
   //-
-  //Fourth Process: If the email is valid (validation done in -previous process-), check if the password is correct (bcrypt.js)
+  //Third Process: If the email is valid (validation done in -previous process-), check if the password is correct (bcrypt.js)
   //The checking is between the password sent by the user and the one on the database after descrypted by bcrypt.js
   isUserAuthenticated = await bcrypt.compare(password, userData.password);
 
 
   //--  
-  //Fifth Process: If user is not authenticated, a new log is saved with the email, visitorId, and TimeStamp
+  //Fourth Process: If user is not authenticated, a new log is saved with the email, visitorId, and TimeStamp
   //If the user is authenticated, a new log is saved with successfull: true
   
   if(!isUserAuthenticated){
