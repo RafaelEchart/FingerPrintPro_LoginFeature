@@ -52,6 +52,8 @@ const signInController = async (req, res, next) => {
 
     const { email, password, visitorId } = req.body;
     let getVisitorInfoFingerPrintJS = undefined;
+    let isNewBrowser = undefined;
+
 
 
     //--
@@ -67,13 +69,15 @@ const signInController = async (req, res, next) => {
           `https://api.fpjs.io/visitors/${visitorId}?api_key=ShKyYQhDzEc2ZEHRKp6V`
         );
         getVisitorInfoFingerPrintJS = await getVisitorInfoFingerPrintJS.json();
-      } catch (err){
+    } catch (err){
         return next(new HttpError("Error in API petition", 404));
-      }
+    }
     
+    //Conditional: Check if new browser
+    if (!getVisitorInfoFingerPrintJS.visits.length) {
+    isNewBrowser = true;
+    }
     
-      console.log(getVisitorInfoFingerPrintJS)
-
 
   
 };
