@@ -24,13 +24,34 @@ const pool = new Pool({
 // - signInController - FingerprintJS PRO feature
 
 const signUpController = async (req, res, next) => {
- 
-
+    const { email, password, visitorId } = req.body;
+  
+    //First Process: Never store password in plain text
+    const hashedPass = await bcrypt.hash(password, 12);
+  
+    //Second Process: Add new user to database, check for duplicates
+    pool.query(
+      "INSERT INTO users (email, password) VALUES ($1, $2)",
+      [email, hashedPass],
+      (error, results) => {
+        if (error) {
+          if (error.code === "23505") {
+            return next(new HttpError("This email is alredy registered.", 404));
+          }
+          return next(
+            new HttpError("Error trying to INSERT user, try again.", 404)
+          );
+        }
+  
+        res.status(201).json(`Account Created!`);
+      }
+    );
 };
-
+  
 const signInController = async (req, res, next) => {
   
 };
+
 
 exports.signUpController = signUpController;
 exports.signInController = signInController;

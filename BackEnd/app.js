@@ -1,3 +1,7 @@
+//ENV variables for clean connection
+const dotenv = require('dotenv');
+dotenv.config();
+
 // Express and bodyParser for connection
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -8,9 +12,6 @@ const HttpError = require("./models/http-error");
 //Sessions
 const sessionsRoutes = require("./sessions/routes/sessions-routes");
 
-//ENV variables for clean connection
-const dotenv = require('dotenv');
-dotenv.config();
 
 
 const app = express();
