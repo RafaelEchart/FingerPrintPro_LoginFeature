@@ -1,5 +1,7 @@
 import "./style.css";
 import { Button } from 'antd'
+import SpinLoading from '../../../Spinner';
+
 const WelcomeContent = ({ visitorData, next }) => (
   <>
     <div className="welcome_division">
@@ -33,7 +35,7 @@ const WelcomeContent = ({ visitorData, next }) => (
          <div><span>Country: { visitorData.visits[0].ipLocation.country.name }</span></div> 
          <div><span>Browser: { visitorData.visits[0].browserDetails.browserName }</span></div> 
          </>
-         : null
+         : <SpinLoading />
        }
       </div>
       </div>

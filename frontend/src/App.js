@@ -21,6 +21,7 @@ function App() {
 
     visitorDataAPI = await visitorDataAPI.json()
     visitorDataAPI = visitorDataAPI.getVisitorInfoFingerPrintJS
+    console.log(visitorDataAPI)
     setVisitorData(visitorDataAPI);
     setIsLoading(false)
   };
@@ -47,7 +48,7 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        {isLoading ? <SpinLoading /> : <StepsContainer visitorData={visitorData} /> }
+        {isLoading ? <SpinLoading size="large" /> : <StepsContainer visitorData={visitorData} /> }
 
       </header>
     </div>

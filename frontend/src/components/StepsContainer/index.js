@@ -4,12 +4,12 @@ import WelcomeContent from './Content/WelcomeContent'
 import HistoryContent from './Content/HistoryContent'
 import FeatureContent from './Content/FeatureContent'
 import SignUpContent from './Content/SignUpContent'
+import SignInContent from './Content/SignInContent'
 
 
 const StepsContainer = ({ visitorData }) => { 
 
     const [ currentStep, setCurrentStep ] = useState(0)
-    console.log(visitorData)
 
     const next = () => {
       console.log('next')
@@ -38,11 +38,11 @@ const StepsContainer = ({ visitorData }) => {
         },
         {
           title: 'Sign Up',
-          content: <SignUpContent visitorData={visitorData} next={next} back={back} />,
+          content: <SignUpContent next={next} back={back} />,
         },
         {
           title: 'Sign In',
-          content: 'Second-content',
+          content: <SignInContent visitorData={visitorData} next={next} back={back} />,
         },
         {
           title: 'Verify',

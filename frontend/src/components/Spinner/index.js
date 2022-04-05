@@ -1,7 +1,7 @@
 import { Spin } from 'antd'
 
-const SpinLoading = () => (
-    <Spin size="large" />
+const SpinLoading = ({ size}) => (
+    <Spin size={size} />
 )
 
 export default SpinLoading;
