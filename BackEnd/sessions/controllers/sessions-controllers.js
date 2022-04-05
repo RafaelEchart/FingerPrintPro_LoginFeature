@@ -98,6 +98,25 @@ const signInController = async (req, res, next) => {
   isUserAuthenticated = await bcrypt.compare(password, userData.password);
 
 
+  //--  
+  //Fifth Process: If user is not authenticated, a new log is saved with the email, visitorId, and TimeStamp
+  //If the user is authenticated, a new log is saved with successfull: true
+  
+  if(!isUserAuthenticated){
+
+    try {
+      await pool.query("INSERT INTO login_attempts (email, visitor_id, successfull) VALUES ($1, $2, $3)", [email, visitorId, false])    
+    } catch(err){
+      console.log("error")
+      console.log(err)
+      return next(new HttpError("Error saving failed login attempt!", 404));
+    }
+    
+    return next(new HttpError(`New failed login attempt saved!`, 404));
+
+  }
+
+
 };
 
 exports.signUpController = signUpController;
