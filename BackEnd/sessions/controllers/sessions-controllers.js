@@ -49,6 +49,32 @@ const signUpController = async (req, res, next) => {
 };
   
 const signInController = async (req, res, next) => {
+
+    const { email, password, visitorId } = req.body;
+    let getVisitorInfoFingerPrintJS = undefined;
+
+
+    //--
+    //First process: Check in the persisted data if the user has 5 failed attempts in the last 5 minutes.
+
+
+
+    //--
+    //Second process: Make use of FingerprintJS Pro to verify is this browser is new to my WebPage.
+    //A get petition to /visitoris/<visitorId>?api_key=ShKyYQhDzEc2ZEHRKp6V
+    try {
+        getVisitorInfoFingerPrintJS = await fetch(
+          `https://api.fpjs.io/visitors/${visitorId}?api_key=ShKyYQhDzEc2ZEHRKp6V`
+        );
+        getVisitorInfoFingerPrintJS = await getVisitorInfoFingerPrintJS.json();
+      } catch (err){
+        return next(new HttpError("Error in API petition", 404));
+      }
+    
+    
+      console.log(getVisitorInfoFingerPrintJS)
+
+
   
 };
 
