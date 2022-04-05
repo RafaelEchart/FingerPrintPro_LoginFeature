@@ -92,6 +92,10 @@ const signInController = async (req, res, next) => {
 
 
 
+  //-
+  //Fourth Process: If the email is valid (validation done in -previous process-), check if the password is correct (bcrypt.js)
+  //The checking is between the password sent by the user and the one on the database after descrypted by bcrypt.js
+  isUserAuthenticated = await bcrypt.compare(password, userData.password);
 
 
 };
