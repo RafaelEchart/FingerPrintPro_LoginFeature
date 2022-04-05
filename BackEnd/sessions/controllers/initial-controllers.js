@@ -19,11 +19,7 @@ const pool = new Pool({
 const initialController = async (req, res, next) => {
 
   const { visitorId } = req.body;
-
-  console.log("here")
-  console.log(visitorId)
-
-
+  
   let getVisitorInfoFingerPrintJS = undefined;
 
   
