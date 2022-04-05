@@ -2,9 +2,17 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+//Sessions
+const sessionsRoutes = require("./sessions/routes/sessions-routes");
+
+
 const app = express();
 
 app.use(bodyParser.json());
+
+
+//API - SESSIONS
+app.use("/api", sessionsRoutes);
 
 
 app.listen(3001, () => {
