@@ -17,8 +17,8 @@ const signInContent = ({ visitorData, next, back }) => {
            Test some of the functionalities of the <a className="link" href="https://fingerprintjs.com/" target="_blank" rel="noopener noreferrer">FingerPrintJS PRO library:</a> <br />
            <Functionalities />
           </span>
-
-          <SignInForm visitorData={visitorData} />
+          
+          <SignInForm visitorData={visitorData} next={next} />
 
   
         </div>

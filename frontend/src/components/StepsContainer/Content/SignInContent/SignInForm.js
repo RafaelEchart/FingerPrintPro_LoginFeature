@@ -28,7 +28,7 @@ const SignInForm = ({ visitorData, next }) => {
   const sendData = async () => {
     if (signInData.email.length && signInData.password.length) {
       try {
-        await fetch("http://localhost:3001/api/login", {
+       let responseData = await fetch("http://localhost:3001/api/login", {
           method: "post",
           headers: {
             "Content-Type": "application/json",
@@ -40,9 +40,16 @@ const SignInForm = ({ visitorData, next }) => {
           }),
         });
 
+        responseData = await responseData.json()
+
+        if (responseData.error) {
+          throw new Error(responseData.error);
+        }
+
         message.success("User authenticated successfully!.");
-        next()
+        // next()
       } catch (err) {
+        message.error(err.toString());
         console.log(err);
       }
     } else {
@@ -51,32 +58,34 @@ const SignInForm = ({ visitorData, next }) => {
   };
 
   return (
-    <div class="signIn_inputWrapper">
-      <div class="form-wrapper">
-        <form class="form-class" method="post">
-          <input
-            id="nameInput"
-            required
-            type="email"
-            placeholder="Email or username"
-            onChange={(e) => signInInputHandler(e, "email")}
-          />
-          <input
-            type="password"
-            id="scoreInput"
-            required
-            placeholder="Password"
-            onChange={(e) => signInInputHandler(e, "password")}
-          />
-          <button
-            type="submit"
-            form="pwgen-form"
-            id="submitButton"
-            onClick={() => sendData()}
-          >
-            Sign in
-          </button>
-        </form>
+    <div>
+      <div class="signIn_inputWrapper">
+        <div class="form-wrapper">
+          <form class="form-class" method="post">
+            <input
+              id="nameInput"
+              required
+              type="email"
+              placeholder="Email or username"
+              onChange={(e) => signInInputHandler(e, "email")}
+            />
+            <input
+              type="password"
+              id="scoreInput"
+              required
+              placeholder="Password"
+              onChange={(e) => signInInputHandler(e, "password")}
+            />
+            <button
+              type="submit"
+              form="pwgen-form"
+              id="submitButton"
+              onClick={() => sendData()}
+            >
+              Sign in
+            </button>
+          </form>
+        </div>
       </div>
     </div>
   );
