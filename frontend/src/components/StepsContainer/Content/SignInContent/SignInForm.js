@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { message } from "antd";
+import { message, Switch } from "antd";
 import "./style.css";
 
 const SignInForm = ({ visitorData, next, errorsHandler }) => {
@@ -7,6 +7,8 @@ const SignInForm = ({ visitorData, next, errorsHandler }) => {
     email: "",
     password: "",
   });
+
+  const [ manualSpoofing, setManualSpoofing ] = useState({state: false, newVisitorID: ""})
 
   const signInInputHandler = (inputInfo, type) => {
     const inputValue = inputInfo.target.value;
@@ -26,7 +28,9 @@ const SignInForm = ({ visitorData, next, errorsHandler }) => {
   };
 
   const sendData = async () => {
-    if (signInData.email.length && signInData.password.length) {
+    //If the manual spoofing is activated then the manualSpoofinf input cannot be empty
+
+    if ( (signInData.email.length && signInData.password.length) && ((manualSpoofing.state && manualSpoofing.newVisitorID.length) || !manualSpoofing.state ) ) {
       try {
        let responseData = await fetch("http://localhost:3001/api/login", {
           method: "post",
@@ -36,7 +40,7 @@ const SignInForm = ({ visitorData, next, errorsHandler }) => {
           body: JSON.stringify({
             email: signInData.email,
             password: signInData.password,
-            visitorId: visitorData.visitorId,
+            visitorId: manualSpoofing.state ? manualSpoofing.newVisitorID : visitorData.visitorId,
           }),
         });
 
@@ -57,8 +61,21 @@ const SignInForm = ({ visitorData, next, errorsHandler }) => {
     }
   };
 
+  const spoofingSwitch = (state) => {
+    setManualSpoofing({newVisitorID: "", state: state})
+    
+
+  }
+
+  const spoofinghandler = (e) => {
+    const newVisitorID = e.target.value
+    setManualSpoofing({...manualSpoofing, newVisitorID: newVisitorID})
+  }
+
+  
+
   return (
-    <div>
+    <div className="signIn_division">
       <div className="signIn_inputWrapper">
         <div className="form-wrapper">
           <form className="form-class" method="post">
@@ -86,6 +103,20 @@ const SignInForm = ({ visitorData, next, errorsHandler }) => {
             </button>
           </form>
         </div>
+      </div>
+      <div className="spoofing_container">
+      <Switch onChange={spoofingSwitch} checked={manualSpoofing.state} />{"  "}
+      <span>Try manual Spoofing of visitorID</span>
+
+     {manualSpoofing.state &&  <input
+              id="newSpoofing"
+              type="text"
+              className="spoofing_input"
+              placeholder={visitorData.visitorId}
+              value={manualSpoofing.newVisitorID}
+              onChange={(e) => spoofinghandler(e)}
+            />}
+
       </div>
     </div>
   );
