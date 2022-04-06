@@ -11,7 +11,7 @@ import VerifyContent from './Content/VerifyContent'
 const StepsContainer = ({ visitorData }) => { 
 
     const [ currentStep, setCurrentStep ] = useState(0)
-    const [ isTrustedDevice, setIsTrustedDevice ] = useState({verifiedData: undefined, userData: undefined})
+    const [ isTrustedDevice, setIsTrustedDevice ] = useState({verifiedData: undefined, userData: undefined, spoofing: undefined})
 
     const next = () => {
       setCurrentStep(currentStep + 1);
@@ -25,9 +25,9 @@ const StepsContainer = ({ visitorData }) => {
     const { Step } = Steps;
 
     //To Handle verification of new device 
-    const handleVerification = (verifiedData, userData) => {
+    const handleVerification = (verifiedData, userData, spoofing) => {
       
-      setIsTrustedDevice({verifiedData, userData: userData })
+      setIsTrustedDevice({verifiedData, userData: userData, spoofing: spoofing })
       next()
     }
 

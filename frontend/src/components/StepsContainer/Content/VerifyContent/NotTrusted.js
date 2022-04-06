@@ -1,8 +1,16 @@
 import { Result, Button, message } from 'antd'
-const NotTrusted = ({back, visitorData, userData}) => {
+const NotTrusted = ({back, visitorData, userData, spoofing}) => {
   console.log(visitorData)
 
   const verifyDevice = async () => {
+    let visitorID
+    if (spoofing && spoofing.state) {
+      visitorID = spoofing.newVisitorID
+    } else {
+      visitorID = visitorData.visitorId
+    }
+
+
     try {
       let responseData = await fetch("http://localhost:3001/api/verify", {
         method: "post",
@@ -11,7 +19,7 @@ const NotTrusted = ({back, visitorData, userData}) => {
         },
         body: JSON.stringify({
           email: userData.email,
-          visitorId: visitorData.visitorId
+          visitorId: visitorID
         }),
       });
 
@@ -38,7 +46,7 @@ const NotTrusted = ({back, visitorData, userData}) => {
     <Result
     status="warning"
     title="Verify your account!"
-    subTitle="This device is not registered as a trusted device, please enter the code sent to your phone to verify your identify!"
+    subTitle="This device is not registered as a trusted device, please enter the code sent to your phone to verify your identity!"
     extra={[
       <Button type="primary" key="console" onClick={back}>
         Back

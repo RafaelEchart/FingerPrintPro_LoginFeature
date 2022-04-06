@@ -9,7 +9,7 @@ const WelcomeContent = ({ visitorData, next }) => (
         <div className="welcome_title">Welcome</div>
         <span>
           When the user enters the Website, the <a className="link" href="https://fingerprintjs.com/" target="_blank" rel="noopener noreferrer">FingerPrintJS PRO library</a> <br />
-          generates an unique ID per browser and user, called <a className="link" href="https://dev.fingerprintjs.com/docs/quick-start-guide#js-agent" target="_blank" rel="noopener noreferrer">VisitorId</a>.
+          generates an unique ID per browser, called <a className="link" href="https://dev.fingerprintjs.com/docs/quick-start-guide#js-agent" target="_blank" rel="noopener noreferrer">VisitorId</a>.
           <br /> This ID is sent to the server to return usefull user information.
         </span>
         <div> 

@@ -4,6 +4,7 @@ import NotTrusted from './NotTrusted';
 
 const VerifyContent = ({ visitorData, data, back }) => {
 
+  console.log(data)
 
 
   return(
@@ -13,7 +14,7 @@ const VerifyContent = ({ visitorData, data, back }) => {
       
       <>
       {data.verifiedData.authenticated_trusted && <Trusted back={back} /> }
-      {data.verifiedData.authenticated_not_trusted && <NotTrusted back={back} visitorData={visitorData} userData={data.userData} /> }
+      {data.verifiedData.authenticated_not_trusted && <NotTrusted back={back} visitorData={visitorData} userData={data.userData} spoofing={data.spoofing} /> }
       </>
 
       

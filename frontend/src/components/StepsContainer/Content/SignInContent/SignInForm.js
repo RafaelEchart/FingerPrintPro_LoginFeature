@@ -53,7 +53,11 @@ const SignInForm = ({ visitorData, errorsHandler, verify }) => {
         message.success("User authenticated successfully!.");
 
         if(responseData.authenticated_trusted || responseData.authenticated_not_trusted){
-          verify(responseData, signInData)
+          if(manualSpoofing.state){
+            verify(responseData, signInData, manualSpoofing)
+          } else {
+            verify(responseData, signInData)
+          }
         }
 
 
