@@ -15,6 +15,7 @@ const pool = new Pool({
 const verifyDeviceController = async (req, res, next) => {
   const { email, visitorId } = req.body;
 
+
     pool.query(
     "INSERT INTO trusted_devices (email, visitor_id) VALUES ($1, $2)",
     [email, visitorId],
