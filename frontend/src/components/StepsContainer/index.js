@@ -5,14 +5,15 @@ import HistoryContent from './Content/HistoryContent'
 import FeatureContent from './Content/FeatureContent'
 import SignUpContent from './Content/SignUpContent'
 import SignInContent from './Content/SignInContent'
+import VerifyContent from './Content/VerifyContent'
 
 
 const StepsContainer = ({ visitorData }) => { 
 
     const [ currentStep, setCurrentStep ] = useState(0)
+    const [ isTrustedDevice, setIsTrustedDevice ] = useState({verifiedData: undefined, userData: undefined})
 
     const next = () => {
-      console.log('next')
       setCurrentStep(currentStep + 1);
     };
   
@@ -22,6 +23,13 @@ const StepsContainer = ({ visitorData }) => {
 
 
     const { Step } = Steps;
+
+    //To Handle verification of new device 
+    const handleVerification = (verifiedData, userData) => {
+      
+      setIsTrustedDevice({verifiedData, userData: userData })
+      next()
+    }
 
     const stepOptions = [
         {
@@ -42,11 +50,11 @@ const StepsContainer = ({ visitorData }) => {
         },
         {
           title: 'Sign In',
-          content: <SignInContent visitorData={visitorData} next={next} back={back} />,
+          content: <SignInContent visitorData={visitorData} next={next} back={back} verify={handleVerification} />,
         },
         {
           title: 'Verify',
-          content: 'Last-content',
+          content: <VerifyContent visitorData={visitorData} back={back} data={isTrustedDevice} />,
         },
       ];
 

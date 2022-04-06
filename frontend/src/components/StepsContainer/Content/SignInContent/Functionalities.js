@@ -26,8 +26,8 @@ const Functionalities = () => {
         <div>
           <p>
             If login is sucessfull then the system<br/>
-            will check if the visitorId and IP (Browser) <br/>
-            were previously saved as trusted devices.
+            will check if the visitorId was <br/>
+            previously saved as a trusted device.
           </p>
         </div>
       )

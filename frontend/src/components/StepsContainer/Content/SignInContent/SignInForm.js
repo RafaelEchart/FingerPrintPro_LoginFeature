@@ -2,7 +2,7 @@ import { useState } from "react";
 import { message, Switch } from "antd";
 import "./style.css";
 
-const SignInForm = ({ visitorData, next, errorsHandler }) => {
+const SignInForm = ({ visitorData, errorsHandler, verify }) => {
   const [signInData, setsignInData] = useState({
     email: "",
     password: "",
@@ -51,7 +51,12 @@ const SignInForm = ({ visitorData, next, errorsHandler }) => {
         }
 
         message.success("User authenticated successfully!.");
-        // next()
+
+        if(responseData.authenticated_trusted || responseData.authenticated_not_trusted){
+          verify(responseData, signInData)
+        }
+
+
       } catch (err) {
         message.error(err.toString());
         errorsHandler(err.toString())

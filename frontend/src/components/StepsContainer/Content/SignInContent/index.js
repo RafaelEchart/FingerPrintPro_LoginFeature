@@ -5,7 +5,7 @@ import Functionalities from './Functionalities'
 import SignInForm from './SignInForm'
 import ErrorsView from './ErrorsView'
 
-const SignInContent = ({ visitorData, next, back }) => {
+const SignInContent = ({ visitorData, next, back, verify }) => {
 
   const [ errorsList, setErrorsList ] = useState([])
   
@@ -25,7 +25,7 @@ const SignInContent = ({ visitorData, next, back }) => {
            <Functionalities />
           </span>
           
-          <SignInForm visitorData={visitorData} next={next} errorsHandler={errorsHandler} />
+          <SignInForm visitorData={visitorData} next={next} errorsHandler={errorsHandler} verify={verify} />
 
   
         </div>

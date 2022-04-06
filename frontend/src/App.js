@@ -21,7 +21,6 @@ function App() {
 
     visitorDataAPI = await visitorDataAPI.json()
     visitorDataAPI = visitorDataAPI.getVisitorInfoFingerPrintJS
-    console.log(visitorDataAPI)
     setVisitorData(visitorDataAPI);
     setIsLoading(false)
   };
