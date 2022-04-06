@@ -29,12 +29,9 @@ const initialController = async (req, res, next) => {
       );
     getVisitorInfoFingerPrintJS = await getVisitorInfoFingerPrintJS.json();
   } catch (err) {
-    console.log(err)
     return next(new HttpError("Error in API petition", 404));
   }
-
-  getVisitorInfoFingerPrintJS.visits =  getVisitorInfoFingerPrintJS.visits.reverse()
-
+  
   res.status(201).json({
     getVisitorInfoFingerPrintJS
   });    

@@ -78,7 +78,6 @@ const signInController = async (req, res, next) => {
     }
 
   }catch(err){
-      console.log(err)
       return res.status(404).json({error: "Error trying to get login attempts." });
   }
 
@@ -135,8 +134,24 @@ const signInController = async (req, res, next) => {
     } catch(err){
       return res.status(404).json({error: "Error saving success login attempt!" });
     }
+
+    //Check for trusted devices
+
+
+    try {
+      const { rows } = await pool.query("  SELECT * FROM trusted_devices WHERE email = $1 AND visitor_id = $2", [email, visitorId])
+      
+      if(rows.length){
+        return res.status(201).json({authenticated_trusted: true});    
+      } 
+      
+    } catch (err){
+    }
+     return res.status(201).json({authenticated_not_trusted: true});    
+
+  
+
     
-    res.status(201).json({authenticated: true});    
   } 
 
 
